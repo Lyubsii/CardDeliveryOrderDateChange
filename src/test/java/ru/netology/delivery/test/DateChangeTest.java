@@ -11,6 +11,7 @@ import ru.netology.delivery.DateChange;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -52,20 +53,20 @@ class DateChangeTest {
         $("[data-test-id='phone'] input").setValue(validUser.getPhone());
         $("[data-test-id='agreement']").click();
         $(byText("Запланировать")).click();
-        $(byText("Успешно")).shouldBe(Condition.visible, Duration.ofSeconds(15));
-        $(".notification__content")
+        $(byText("Успешно")).shouldBe(visible, Duration.ofSeconds(15));
+        $("[data-test-id='success-notification'] .notification__content")
                 .shouldHave(Condition.text("Встреча успешно забронирована на " + firstMeetingDate))
-                .shouldBe(Condition.visible);
+                .shouldBe(visible);
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[data-test-id='date'] input").setValue(firstMeetingDate);
+        $("[data-test-id='date'] input").setValue(secondMeetingDate);
         $(byText("Запланировать")).click();
-        $(".notification__content")
+        $("[data-test-id='success-notification'] .notification__content")
                 .shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
-                .shouldBe(Condition.visible);
+                .shouldBe(visible);
         $("[data-test-id='replan-notification'] button").click();
         $("[data-test-id='success-notification'] .notification__content")
                 .shouldHave(Condition.text("Встреча успешно забронирована на " + secondMeetingDate))
-                .shouldBe(Condition.visible);
+                .shouldBe(visible);
 
 
 

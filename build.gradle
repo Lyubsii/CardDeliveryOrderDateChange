@@ -15,11 +15,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.appmattus.fixture:fixture-javafaker:1.2.0'
+    testImplementation 'com.appmattus.fixture:fixture-javafaker:1.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testImplementation 'com.codeborne:selenide:6.12.3'
     implementation 'com.github.javafaker:javafaker:1.0.2'
-
 
 }
 
